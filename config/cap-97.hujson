@@ -2,11 +2,10 @@
   "Version": "alpha0",
 	"Locked": true,
 
-	"ServerURL": "hs.hemge.org",
-	"AuthKey": "changeme",
+	"ServerURL": "https://hs.hemge.org",
+	"AuthKey": "42c8fdf819a0c3e743e36dc07d27d60be054ae319ac14370",
 	"Enabled": true,
 
-	"OperatorUser": 1000,
 	"Hostname": "contailner",
 
 	"AcceptDNS": true,

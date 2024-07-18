@@ -1,6 +1,6 @@
 services:
   tailscale-nginx:
-    image: docker.io/tailscale/tailscale:latest
+    image: docker.io/tailscale/tailscale@sha256:a0d1a9ed2abfacf905c0e3423aea00181064162e548f875f422a03924b9cc5c4
     hostname: tailscale-nginx
     environment:
       # The following 'must not be set' along with a config file
@@ -15,7 +15,7 @@ services:
       - TS_USERSPACE=true
       - TS_EXPERIMENTAL_VERSIONED_CONFIG_DIR=/custom_config
     volumes:
-      - ./tailscale-nginx/state:/var/lib/tailscale:rw
+      - ./state:/var/lib/tailscale:rw
       - ./config:/custom_config:Z
       - /dev/net/tun:/dev/net/tun:ro
     cap_add:
