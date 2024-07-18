@@ -1,6 +1,9 @@
 services:
   contailner:
     image: docker.io/tailscale/tailscale@sha256:a0d1a9ed2abfacf905c0e3423aea00181064162e548f875f422a03924b9cc5c4
+    privileged: true
+    restart: unless-stopped
+    container_name: contailner
     hostname: contailner
     environment:
       # The following 'must not be set' along with a config file
@@ -21,14 +24,14 @@ services:
     cap_add:
       - net_admin
       - sys_module
-    privileged: true
-    restart: unless-stopped
+    #ports: 
+    #  - host-port:port-from-services-below
 
-  ## Insert service here
-  nginx:
-    image: docker.io/nginx
-    network_mode: service:contailner
-    depends_on:
-      - contailner
-    network_mode: service:tailscale-nginx
+  #YOUR-SERVICE:
+  #  ## Any image you choose
+  #  image: docker.io/nginx
+  #  ## Required for 'contailner' to pass traffic through the tialnet
+  #  network_mode: service:contailner
+  #  depends_on:
+  #    - contailner
 
