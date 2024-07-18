@@ -1,0 +1,14 @@
+{
+  "Version": "alpha0",
+	"Locked": true,
+
+	"ServerURL": "https://[your domain here!!]",
+	"AuthKey": "replace me!!",
+	"Enabled": true,
+
+	"Hostname": "contailner",
+
+	"AcceptDNS": true,
+	"AcceptRoutes": false
+
+}

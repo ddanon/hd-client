@@ -1,0 +1,48 @@
+services:
+  contailner:
+    image: docker.io/tailscale/tailscale@sha256:a0d1a9ed2abfacf905c0e3423aea00181064162e548f875f422a03924b9cc5c4
+    hostname: contailner
+    environment:
+      # The following 'must not be set' along with a config file
+      # according to cmd/containerboot/main.go, otherwise:
+      # `tailscale set` and `tailscale up` fail to run
+      #- TS_HOSTNAME
+      #- TS_ROUTES
+      #- TS_ACCEPT_DNS
+      #- TS_AUTHKEY=tskey-client-notAReal-OAuthClientSecret1Atawk
+      #- TS_EXTRA_ARGS=--advertise-tags=tag:container
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=true
+      - TS_EXPERIMENTAL_VERSIONED_CONFIG_DIR=/custom_config
+    volumes:
+      - ./state:/var/lib/tailscale:rw
+      - ./config:/custom_config:Z
+      - /dev/net/tun:/dev/net/tun:ro
+    cap_add:
+      - net_admin
+      - sys_module
+    ports:
+      - 80:80      # traefik
+      - 8080:8080  # traefik
+    privileged: true
+    restart: unless-stopped
+
+  traefik:
+    image: "traefik:v3.1"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.web.address=:80"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  whoami:
+    image: "traefik/whoami"
+    container_name: "simple-service"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
