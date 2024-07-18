@@ -1,4 +1,51 @@
-Final instructions for anyone following behind me.
+# Description
+
+I made this repo so I can connect tailscale containers to my headscale server. Huge shoutout to [irbekrm](https://github.com/irbekrm) for the help!
+
+The resulting compose file allows me to have one service per client, which makes use of MagicDNS to achieve the following:
+
+Without this setup:
+
+  _____________________________
+ |                             |
+ |     my-main-machine + TS    |
+ |                             |
+ | - - - - - - - - - - - - - - |
+ | Jellyfin Container   :8096  |
+ | - - - - - - - - - - - - - - |
+ | Some Other Container :12345 |
+ | - - - - - - - - - - - - - - |
+ | Yet Another Container :80   |
+ |_____________________________|
+
+ Jellyfin connection = `http://my-main-machine:8096`
+ Some Other connection = `http://my-main-machine:12345`
+ Yet Another connection = `http://my-main-machine:80`
+
+With this setup:
+
+  _________________________________
+ |                                 |
+ |     my-main-machine             |
+ |                                 |
+ | - - - - - - - - - - - - - - - - |
+ | Contailner + Jellyfin   + NGINX |
+ | - - - - - - - - - - - - - - - - |
+ | Contailner + :12345 srv + NGINX |
+ | - - - - - - - - - - - - - - - - |
+ | Contailner + :80 srv    + NGINX |
+ |_________________________________|
+
+ Jellyfin connection = `http://jellyfin.services.[my-domain].org`
+ Some Other connection = `http://some-other-service.services.[my-domain].org`
+ Yet Another connection = `http://yet-another-service.services.[my-domain].org`
+
+
+While it seems like a small thing, here are the primary benefits I'm after:
+- makes self hosted service access more natrual for less tech-literate users of my head(tail?)net
+- makes use of MagicDNS so I don't have to manage IPs and ports manually
+- with some tweaks, gives me a dashboard of service health across my network
+- allows for _very_ easy addition of services, regardless of what hardware or LAN they happen to be physically on
 
 # Assumptions
 
