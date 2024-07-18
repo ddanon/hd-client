@@ -6,6 +6,7 @@ The resulting compose file allows me to have one service per client, which makes
 
 Without this setup:
 
+```
   _____________________________
  |                             |
  |     my-main-machine + TS    |
@@ -17,6 +18,7 @@ Without this setup:
  | - - - - - - - - - - - - - - |
  | Yet Another Container :80   |
  |_____________________________|
+```
 
  Jellyfin connection = `http://my-main-machine:8096`
  Some Other connection = `http://my-main-machine:12345`
@@ -24,6 +26,7 @@ Without this setup:
 
 With this setup:
 
+```
   _________________________________
  |                                 |
  |     my-main-machine             |
@@ -35,6 +38,7 @@ With this setup:
  | - - - - - - - - - - - - - - - - |
  | Contailner + :80 srv    + NGINX |
  |_________________________________|
+```
 
  Jellyfin connection = `http://jellyfin.services.[my-domain].org`
  Some Other connection = `http://some-other-service.services.[my-domain].org`
