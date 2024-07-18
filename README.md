@@ -107,4 +107,8 @@ services:
 
 As always, don't take my word for it. Read the docs if anything seems off!
 
+- [tailscale container docs](https://tailscale.com/kb/1282/docker)
+- [my issue on the tailscale repo, discussion that led to making this repo](https://github.com/tailscale/tailscale/issues/12831)
+- [tailscale dockerhub page](https://hub.docker.com/r/tailscale/tailscale)
 - [headscale - running on docker docs](https://github.com/juanfont/headscale/blob/main/docs/running-headscale-container.md)
+
