@@ -1,7 +1,11 @@
+version: 3.9
 services:
   contailner:
     image: docker.io/tailscale/tailscale@sha256:a0d1a9ed2abfacf905c0e3423aea00181064162e548f875f422a03924b9cc5c4
-    hostname: contailner
+    privileged: true
+    restart: unless-stopped
+    hostname: traefik-hello-world
+    container_name: "traefik-hello-world"
     environment:
       # The following 'must not be set' along with a config file
       # according to cmd/containerboot/main.go, otherwise:
@@ -11,9 +15,9 @@ services:
       #- TS_ACCEPT_DNS
       #- TS_AUTHKEY=tskey-client-notAReal-OAuthClientSecret1Atawk
       #- TS_EXTRA_ARGS=--advertise-tags=tag:container
+      - TS_EXPERIMENTAL_VERSIONED_CONFIG_DIR=/custom_config
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_USERSPACE=true
-      - TS_EXPERIMENTAL_VERSIONED_CONFIG_DIR=/custom_config
     volumes:
       - ./state:/var/lib/tailscale:rw
       - ./config:/custom_config:Z
@@ -22,14 +26,16 @@ services:
       - net_admin
       - sys_module
     ports:
-      - 80:80      # traefik
+      - 8000:80    # traefik
       - 8080:8080  # traefik
-    privileged: true
-    restart: unless-stopped
 
   traefik:
-    image: "traefik:v3.1"
+    image: docker.io/traefik:v3.1.0
+    privileged: true
+    restart: unless-stopped
     container_name: "traefik"
+    network_mode: service:contailner
+    depends_on: contailner
     command:
       #- "--log.level=DEBUG"
       - "--api.insecure=true"
@@ -37,12 +43,15 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entryPoints.web.address=:80"
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - /var/run/user/1000/podman/podman.sock:/var/run/docker.sock:rw
 
-  whoami:
-    image: "traefik/whoami"
-    container_name: "simple-service"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+    #whoami:
+    #  image: docker.io/traefik/whoami
+    #  container_name: "simple-service"
+    #  network_mode: service:contailner
+    #  depends_on: contailner
+    #  labels:
+    #    - "traefik.enable=true"
+    #    - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+    #    - "traefik.http.routers.whoami.entrypoints=web"
+

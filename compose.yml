@@ -27,7 +27,8 @@ services:
   ## Insert service here
   nginx:
     image: docker.io/nginx
+    network_mode: service:contailner
     depends_on:
-      - tailscale-nginx
+      - contailner
     network_mode: service:tailscale-nginx
 
