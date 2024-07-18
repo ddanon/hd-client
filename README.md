@@ -92,7 +92,7 @@ services:
   
 ```
 
-5. [on the client] replace the ServerURL and AuthKey values.
+5. [on the client] replace the ServerURL and AuthKey values in `cap-97.hujson`
 
 ```json
 {
