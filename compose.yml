@@ -1,0 +1,33 @@
+services:
+  tailscale-nginx:
+    image: docker.io/tailscale/tailscale:latest
+    hostname: tailscale-nginx
+    environment:
+      # The following 'must not be set' along with a config file
+      # according to cmd/containerboot/main.go, otherwise:
+      # `tailscale set` and `tailscale up` fail to run
+      #- TS_HOSTNAME
+      #- TS_ROUTES
+      #- TS_ACCEPT_DNS
+      #- TS_AUTHKEY=tskey-client-notAReal-OAuthClientSecret1Atawk
+      #- TS_EXTRA_ARGS=--advertise-tags=tag:container
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=true
+      - TS_EXPERIMENTAL_VERSIONED_CONFIG_DIR=/custom_config
+    volumes:
+      - ./tailscale-nginx/state:/var/lib/tailscale:rw
+      - ./config:/custom_config:Z
+      - /dev/net/tun:/dev/net/tun:ro
+    cap_add:
+      - net_admin
+      - sys_module
+    privileged: true
+    restart: unless-stopped
+
+  ## Insert service here
+  nginx:
+    image: docker.io/nginx
+    depends_on:
+      - tailscale-nginx
+    network_mode: service:tailscale-nginx
+
