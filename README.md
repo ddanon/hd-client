@@ -18,11 +18,11 @@ Without this setup:
  | - - - - - - - - - - - - - - |
  | Yet Another Container :80   |
  |_____________________________|
-```
 
  Jellyfin connection = `http://my-main-machine:8096`
  Some Other connection = `http://my-main-machine:12345`
  Yet Another connection = `http://my-main-machine:80`
+```
 
 With this setup:
 
@@ -38,11 +38,11 @@ With this setup:
  | - - - - - - - - - - - - - - - - |
  | Contailner + :80 srv    + NGINX |
  |_________________________________|
-```
 
  Jellyfin connection = `http://jellyfin.services.[my-domain].org`
  Some Other connection = `http://some-other-service.services.[my-domain].org`
  Yet Another connection = `http://yet-another-service.services.[my-domain].org`
+```
 
 
 While it seems like a small thing, here are the primary benefits I'm after:
