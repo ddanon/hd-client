@@ -1,0 +1,14 @@
+{
+  "Version": "alpha0",
+	"Locked": true,
+
+	"ServerURL": "https://[your-domain-here!!]",
+	"AuthKey": "changeme!!",
+	"Enabled": true,
+
+	"Hostname": "pihole",
+
+	"AcceptDNS": true,
+	"AcceptRoutes": false
+
+}
