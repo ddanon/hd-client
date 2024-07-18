@@ -48,7 +48,7 @@ With this setup:
 While it seems like a small thing, here are the primary benefits I'm after:
 - makes self hosted service access more natrual for less tech-literate users of my head(tail?)net
 - makes use of MagicDNS so I don't have to manage IPs and ports manually
-- with some tweaks, gives me a dashboard of service health across my network
+- with some tweaks, gives me a dashboard of _service health_ (not just system connection status) across my network
 - allows for _very_ easy addition of services, regardless of what hardware or LAN they happen to be physically on
 
 # Assumptions
