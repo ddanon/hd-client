@@ -1,7 +1,7 @@
 services:
-  tailscale-nginx:
+  contailner:
     image: docker.io/tailscale/tailscale@sha256:a0d1a9ed2abfacf905c0e3423aea00181064162e548f875f422a03924b9cc5c4
-    hostname: tailscale-nginx
+    hostname: contailner
     environment:
       # The following 'must not be set' along with a config file
       # according to cmd/containerboot/main.go, otherwise:

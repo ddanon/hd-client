@@ -2,8 +2,8 @@
   "Version": "alpha0",
 	"Locked": true,
 
-	"ServerURL": "https://hs.hemge.org",
-	"AuthKey": "42c8fdf819a0c3e743e36dc07d27d60be054ae319ac14370",
+	"ServerURL": "https://[your domain here!!]",
+	"AuthKey": "replace me!!",
 	"Enabled": true,
 
 	"Hostname": "contailner",
