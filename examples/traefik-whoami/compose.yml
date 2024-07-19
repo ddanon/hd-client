@@ -1,11 +1,10 @@
 version: 3.9
 services:
-  contailner:
+  traefik-contailner:
     image: docker.io/tailscale/tailscale@sha256:a0d1a9ed2abfacf905c0e3423aea00181064162e548f875f422a03924b9cc5c4
     privileged: true
     restart: unless-stopped
-    hostname: traefik-hello-world
-    container_name: "traefik-hello-world"
+    container_name: "traefik-contailner"
     environment:
       # The following 'must not be set' along with a config file
       # according to cmd/containerboot/main.go, otherwise:
