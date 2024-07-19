@@ -1,6 +1,6 @@
 {
   "Version": "alpha0",
-	"Locked": true,
+	"Locked": false,
 
 	"ServerURL": "https://[your domain here!!]",
 	"AuthKey": "replace me!!",
