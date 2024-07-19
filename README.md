@@ -56,7 +56,7 @@ While it seems like a small thing, here are the primary benefits I'm after:
 - you want to create a services user to run these under
 - you're using rootless podman(-compose) for both the headscale server and the tailscale container client (like I did)
 - you already have a running headscale server, built from: _**docker.io/headscale/headscale:0.23.0-alpha12-debug**_
-
+- you're using a newer version of podman -- I use podman & podman-compose from nixpkgs-stable (currently podman 5.1.2 and podman-compose 1.2.0)
 # Instructions
 
 1. `git pull https://github.com/ddanon/hd-client.git`
@@ -104,6 +104,13 @@ services:
 ```
 
 6. `podman-compose up -d`
+
+# Warnings
+
+I tried porting this over to a raspberry pi 4 running the latest raspberry pi OS as of 20240718. The compose files herein **failed** with podman-compose v1.0.3.
+
+
+# References 
 
 As always, don't take my word for it. Read the docs if anything seems off!
 
