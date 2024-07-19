@@ -30,7 +30,7 @@ services:
     privileged: true
     restart: unless-stopped
     container_name: "traefik"
-    network_mode: service:contailner
+    network: service:contailner
     depends_on: contailner
     command:
       #- "--log.level=DEBUG"

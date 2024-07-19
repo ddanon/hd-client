@@ -1,5 +1,5 @@
 # TODO
 
-- [] PiHole dashboard working\
+- [x] PiHole dashboard working over tailnet!
 - [] Test as exit node 
 

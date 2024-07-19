@@ -25,9 +25,12 @@ services:
       - net_admin
       - sys_module
 
-    elb:
-        image: haproxy
-        #ports:
-        #    - "8100:8100"
-        volumes:
-            - ./haproxy:/usr/local/etc/haproxy
+  elb:
+    image: haproxy
+    #ports:
+    #    - "8100:8100"
+    volumes:
+        - ./haproxy:/usr/local/etc/haproxy
+    network: service:haproxy-contailner
+    depends_on:
+      - haproxy-contailner

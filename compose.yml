@@ -33,7 +33,7 @@ services:
   #  ## Any image you choose
   #  image: docker.io/nginx
   #  ## Required for 'contailner' to pass traffic through the tialnet
-  #  network_mode: service:contailner
+  #  network: service:contailner
   #  depends_on:
   #    - contailner
 

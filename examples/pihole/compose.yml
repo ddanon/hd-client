@@ -44,7 +44,7 @@ services:
       - ./etc-pihole:/etc/pihole:Z
       - ./etc-dnsmasq.d:/etc/dnsmasq.d:Z
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    network_mode: service:contailner
+    network: service:contailner
     depends_on:
       - contailner
 

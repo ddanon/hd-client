@@ -1,5 +1,5 @@
 # TODO
 
-- [] PiHole dashboard working\
-- [] Test as exit node 
+- [] Test multiple services
+- [] Test on tailnet 
 
