@@ -4,8 +4,8 @@ services:
     image: docker.io/tailscale/tailscale@sha256:a0d1a9ed2abfacf905c0e3423aea00181064162e548f875f422a03924b9cc5c4
     privileged: true
     restart: unless-stopped
-    hostname: pihole-contailner-compose
-    container_name: "pihole-contailner-name"
+    hostname: pihole-contailner
+    container_name: "pihole-contailner"
     environment:
       # The following 'must not be set' along with a config file
       # according to cmd/containerboot/main.go, otherwise:
@@ -28,8 +28,9 @@ services:
 
   # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
   pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
+    container_name: pihole-actual
+    hostname: pihole-actual
+    image: docker.io/pihole/pihole:latest
     restart: unless-stopped
     # Not necessary for this implementation
     #ports:
